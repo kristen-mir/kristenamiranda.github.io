@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olivia Chen – Digital Marketing</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --baby: #fce4ec;
+    --baby-mid: #f8bbd0;
+    --hot: #e91e8c;
+    --hot-dark: #c2185b;
+    --text: #1a1a1a;
+    --muted: #777;
+    --border: #f0c8d8;
+    --bg: #fff;
+    --surface: #fff9fb;
+  }
+  body { font-family: 'Georgia', serif; color: var(--text); background: var(--bg); font-size: 16px; }
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem; border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; background: rgba(255,255,255,0.95); z-index: 100;
+  }
+  .logo { font-family: 'Georgia', serif; font-size: 18px; letter-spacing: 0.08em; color: var(--hot); font-weight: normal; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; font-family: sans-serif; font-size: 13px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--hot); }
+
+  section { padding: 5rem 3rem; max-width: 1100px; margin: 0 auto; }
+
+  /* HERO */
+  .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
+  .hero-text h1 { font-size: 52px; font-weight: normal; line-height: 1.15; margin-bottom: 1.2rem; }
+  .hero-text h1 span { color: var(--hot); font-style: italic; }
+  .hero-text p { font-family: sans-serif; font-size: 15px; line-height: 1.8; color: var(--muted); margin-bottom: 2rem; max-width: 400px; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--hot); color: #fff; border: none; padding: 0.75rem 1.8rem; font-family: sans-serif; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--hot-dark); }
+  .btn-outline { background: transparent; color: var(--hot); border: 1px solid var(--hot); padding: 0.75rem 1.8rem; font-family: sans-serif; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+  .btn-outline:hover { background: var(--baby); }
+  .hero-visual { display: flex; justify-content: center; }
+  .phone-frame {
+    width: 220px; height: 440px; border: 2px solid var(--border); border-radius: 32px;
+    background: var(--surface); position: relative; overflow: hidden; padding: 12px;
+  }
+  .phone-notch { width: 60px; height: 10px; background: var(--border); border-radius: 6px; margin: 4px auto 10px; }
+  .ig-post { background: var(--baby); border-radius: 16px; height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; overflow: hidden; }
+  .ig-post-inner { text-align: center; }
+  .ig-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--hot), #ff9a9e); display: inline-block; margin-bottom: 6px; }
+  .ig-post p { font-family: sans-serif; font-size: 10px; color: var(--hot-dark); font-weight: 600; }
+  .ig-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+  .ig-tile { height: 60px; border-radius: 8px; }
+  .t1 { background: var(--baby-mid); }
+  .t2 { background: #f3e5f5; }
+  .t3 { background: var(--baby); }
+  .t4 { background: #fce4ec; }
+  .t5 { background: #e8f5e9; }
+  .t6 { background: #fff3e0; }
+  .ig-handle { font-family: sans-serif; font-size: 11px; color: var(--muted); text-align: center; margin-top: 8px; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
+  .about-label { font-family: sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--hot); margin-bottom: 1.5rem; }
+  .section-title { font-size: 36px; font-weight: normal; margin-bottom: 1.5rem; }
+  .about-grid p { font-family: sans-serif; font-size: 15px; line-height: 1.85; color: var(--muted); margin-bottom: 1rem; }
+  .skills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .skill-tag { background: var(--baby); color: var(--hot-dark); font-family: sans-serif; font-size: 12px; padding: 6px 14px; letter-spacing: 0.04em; }
+  .about-stat { border-left: 2px solid var(--baby-mid); padding-left: 1.2rem; margin-bottom: 2rem; }
+  .about-stat .num { font-size: 36px; color: var(--hot); }
+  .about-stat .desc { font-family: sans-serif; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* WORK */
+  .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .card {
+    border: 1px solid var(--border); padding: 2rem; cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    background: var(--bg);
+  }
+  .card:hover { border-color: var(--hot); background: var(--surface); }
+  .card-tag { font-family: sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--hot); margin-bottom: 0.75rem; }
+  .card h3 { font-size: 20px; font-weight: normal; margin-bottom: 0.75rem; line-height: 1.3; }
+  .card p { font-family: sans-serif; font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 1.2rem; }
+  .card-meta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .meta-chip { background: var(--baby); font-family: sans-serif; font-size: 11px; color: var(--hot-dark); padding: 4px 10px; }
+
+  /* CAMPAIGN MOCK */
+  .campaign-section { background: var(--surface); padding: 4rem 3rem; }
+  .campaign-inner { max-width: 1100px; margin: 0 auto; }
+  .campaign-overview { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+  .c-card { background: var(--bg); border: 1px solid var(--border); padding: 1.5rem; }
+  .c-card h4 { font-family: sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; }
+  .c-card .big { font-size: 28px; color: var(--text); }
+  .c-card .sub { font-family: sans-serif; font-size: 13px; color: var(--muted); margin-top: 0.25rem; }
+  .funnel { margin-top: 3rem; }
+  .funnel-title { font-family: sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--hot); margin-bottom: 1.5rem; }
+  .funnel-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; }
+  .funnel-label { font-family: sans-serif; font-size: 13px; color: var(--muted); width: 100px; text-align: right; }
+  .funnel-bar-wrap { flex: 1; height: 36px; background: var(--baby); position: relative; }
+  .funnel-bar { height: 100%; background: var(--hot); transition: width 0.8s ease; display: flex; align-items: center; padding-left: 12px; }
+  .funnel-bar span { font-family: sans-serif; font-size: 12px; color: #fff; font-weight: 600; }
+  .deliverables { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2.5rem; }
+  .deliv { border: 1px solid var(--border); padding: 1.25rem; text-align: center; background: var(--bg); }
+  .deliv-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--baby); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; font-size: 16px; }
+  .deliv h5 { font-family: sans-serif; font-size: 13px; color: var(--text); margin-bottom: 0.25rem; }
+  .deliv p { font-family: sans-serif; font-size: 12px; color: var(--muted); }
+
+  /* INSTAGRAM */
+  .ig-section { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 3rem; background: var(--surface); }
+  .ig-inner { max-width: 1100px; margin: 0 auto; }
+  .ig-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+  .ig-profile { display: flex; align-items: center; gap: 1.25rem; }
+  .ig-av-big { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--hot), #ffb3c6); flex-shrink: 0; }
+  .ig-name { font-size: 18px; }
+  .ig-handle-big { font-family: sans-serif; font-size: 13px; color: var(--muted); }
+  .ig-stats { display: flex; gap: 2rem; }
+  .ig-stat { text-align: center; }
+  .ig-stat .n { font-size: 20px; }
+  .ig-stat .l { font-family: sans-serif; font-size: 12px; color: var(--muted); }
+  .ig-feed { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .ig-feed-tile { aspect-ratio: 1; border-radius: 2px; position: relative; overflow: hidden; cursor: pointer; }
+  .ig-feed-tile:hover .ig-overlay { opacity: 1; }
+  .ig-overlay { position: absolute; inset: 0; background: rgba(233,30,140,0.15); opacity: 0; transition: opacity 0.2s; display: flex; align-items: center; justify-content: center; }
+  .ig-overlay span { font-family: sans-serif; font-size: 11px; color: var(--hot-dark); font-weight: 600; }
+  .f1 { background: #fce4ec; } .f2 { background: #f8bbd0; } .f3 { background: #e8f5e9; }
+  .f4 { background: #fff3e0; } .f5 { background: #f3e5f5; } .f6 { background: #fce4ec; }
+  .f7 { background: #e1f5fe; } .f8 { background: #f8bbd0; } .f9 { background: #fafafa; }
+  .ig-caption { font-family: sans-serif; font-size: 12px; color: var(--muted); text-align: center; margin-top: 0.75rem; font-style: italic; }
+
+  /* CONTACT */
+  .contact-inner { text-align: center; max-width: 500px; margin: 0 auto; }
+  .contact-inner p { font-family: sans-serif; font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-link { font-family: sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hot); text-decoration: none; padding: 0.5rem 0; border-bottom: 1px solid var(--baby-mid); }
+
+  footer { text-align: center; padding: 2rem; font-family: sans-serif; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); }
+
+  .divider { width: 40px; height: 1px; background: var(--baby-mid); margin: 0 auto 2rem; }
+
+  /* Active nav */
+  .active-section { color: var(--hot) !important; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Olivia Chen</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#campaign">Campaign</a></li>
+    <li><a href="#instagram">Brand</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text">
+    <h1>Digital <span>Marketing</span> Graduate &amp; Content Creator</h1>
+    <p>B.S. Digital Marketing, Class of May 2026. Passionate about brand storytelling, social strategy, and building communities rooted in wellness and authenticity.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">View My Work</button>
+      <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Let's Connect</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="ig-post">
+        <div class="ig-post-inner">
+          <div class="ig-avatar"></div>
+          <p>@oliviachen.wellness</p>
+        </div>
+      </div>
+      <div class="ig-grid">
+        <div class="ig-tile t1"></div>
+        <div class="ig-tile t2"></div>
+        <div class="ig-tile t3"></div>
+        <div class="ig-tile t4"></div>
+        <div class="ig-tile t5"></div>
+        <div class="ig-tile t6"></div>
+      </div>
+      <div class="ig-handle">Fitness · Wellness · Lifestyle</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="about-label">About</div>
+      <div class="about-stat">
+        <div class="num">2026</div>
+        <div class="desc">B.S. Digital Marketing</div>
+      </div>
+      <div class="about-stat">
+        <div class="num">8.2k</div>
+        <div class="desc">Instagram Followers</div>
+      </div>
+      <div class="about-stat">
+        <div class="num">4</div>
+        <div class="desc">Completed Campaigns</div>
+      </div>
+    </div>
+    <div>
+      <h2 class="section-title">Strategy-first. Story-driven.</h2>
+      <p>I'm a soon-to-be Digital Marketing graduate with a deep love for the intersection of data and creativity. My coursework has spanned SEO, paid media, content strategy, brand management, and consumer behavior — and I've put it all into practice building my own wellness brand online.</p>
+      <p>Outside the classroom, I document my fitness journey and holistic lifestyle on Instagram, where I've grown an engaged community from zero. Every caption, Reel, and Story has been a real-world lesson in brand voice, community building, and platform algorithm strategy.</p>
+      <div class="skills">
+        <span class="skill-tag">Social Media Strategy</span>
+        <span class="skill-tag">Content Creation</span>
+        <span class="skill-tag">SEO & SEM</span>
+        <span class="skill-tag">Email Marketing</span>
+        <span class="skill-tag">Brand Identity</span>
+        <span class="skill-tag">Google Analytics</span>
+        <span class="skill-tag">Paid Social (Meta Ads)</span>
+        <span class="skill-tag">Canva & Adobe Suite</span>
+        <span class="skill-tag">HubSpot</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-header">
+    <div>
+      <div class="about-label">Coursework & Projects</div>
+      <h2 class="section-title" style="margin-bottom:0">Selected Work</h2>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-tag">SEO Strategy</div>
+      <h3>Local Business Audit &amp; Keyword Roadmap</h3>
+      <p>Conducted a full SEO audit for a local yoga studio — identified 43 keyword opportunities, rebuilt meta structure, and projected a 28% traffic lift over 6 months.</p>
+      <div class="card-meta">
+        <span class="meta-chip">Semrush</span>
+        <span class="meta-chip">Google Search Console</span>
+        <span class="meta-chip">Technical SEO</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag">Paid Media</div>
+      <h3>Meta Ads Simulation — DTC Wellness Brand</h3>
+      <p>Designed a three-phase Facebook & Instagram ad campaign targeting women 22–35. Produced creative briefs, audience segmentation strategy, and a mock $5k budget allocation.</p>
+      <div class="card-meta">
+        <span class="meta-chip">Meta Ads Manager</span>
+        <span class="meta-chip">Audience Research</span>
+        <span class="meta-chip">A/B Testing</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag">Content Strategy</div>
+      <h3>12-Week Editorial Calendar — Fitness App</h3>
+      <p>Built a multi-platform content calendar for a hypothetical fitness app launch: 84 posts across Instagram, TikTok, and Pinterest with pillar content themes and engagement hooks.</p>
+      <div class="card-meta">
+        <span class="meta-chip">Content Planning</span>
+        <span class="meta-chip">TikTok Strategy</span>
+        <span class="meta-chip">Pinterest SEO</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag">Email Marketing</div>
+      <h3>Drip Campaign — E-commerce Wellness Brand</h3>
+      <p>Developed a 6-email welcome series using behavioral triggers. Designed wireframes in Mailchimp, wrote all copy, and benchmarked against industry open-rate averages (avg. 22%).</p>
+      <div class="card-meta">
+        <span class="meta-chip">Mailchimp</span>
+        <span class="meta-chip">Copywriting</span>
+        <span class="meta-chip">Automation Logic</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAMPAIGN MOCK -->
+<div class="campaign-section" id="campaign">
+  <div class="campaign-inner">
+    <div class="about-label">Mock Campaign</div>
+    <h2 class="section-title">GlowFuel — New Product Launch</h2>
+    <p style="font-family:sans-serif;font-size:14px;color:var(--muted);max-width:600px;line-height:1.8;margin-bottom:0.5rem;">A hypothetical 60-day launch campaign for a plant-based protein supplement targeting wellness-forward women on Instagram and TikTok. Developed as a capstone project.</p>
+
+    <div class="campaign-overview">
+      <div class="c-card">
+        <h4>Campaign Budget</h4>
+        <div class="big">$12,500</div>
+        <div class="sub">60-day paid + organic</div>
+      </div>
+      <div class="c-card">
+        <h4>Target Reach</h4>
+        <div class="big">180,000</div>
+        <div class="sub">Unique impressions goal</div>
+      </div>
+      <div class="c-card">
+        <h4>Projected ROAS</h4>
+        <div class="big">3.2×</div>
+        <div class="sub">Based on industry benchmarks</div>
+      </div>
+    </div>
+
+    <div class="funnel">
+      <div class="funnel-title">Campaign Funnel — Projected Performance</div>
+      <div class="funnel-row">
+        <div class="funnel-label">Impressions</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:100%"><span>180,000</span></div></div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">Reach</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:75%"><span>135,000</span></div></div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">Link Clicks</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:30%"><span>54,000</span></div></div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">Add to Cart</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:12%"><span>21,600</span></div></div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">Conversions</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:5%"><span>9,000</span></div></div>
+      </div>
+    </div>
+
+    <div class="deliverables">
+      <div class="deliv">
+        <div class="deliv-icon">📱</div>
+        <h5>Social Creative</h5>
+        <p>30 posts, 12 Reels, 6 Stories templates</p>
+      </div>
+      <div class="deliv">
+        <div class="deliv-icon">📧</div>
+        <h5>Email Nurture</h5>
+        <p>5-email launch series with abandon flow</p>
+      </div>
+      <div class="deliv">
+        <div class="deliv-icon">🎯</div>
+        <h5>Paid Ads</h5>
+        <p>3 ad sets, 2 audiences, A/B creative</p>
+      </div>
+      <div class="deliv">
+        <div class="deliv-icon">📊</div>
+        <h5>Analytics Plan</h5>
+        <p>KPI dashboard + weekly reporting cadence</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INSTAGRAM -->
+<div class="ig-section" id="instagram">
+  <div class="ig-inner">
+    <div class="ig-header">
+      <div class="ig-profile">
+        <div class="ig-av-big"></div>
+        <div>
+          <div class="ig-name">Olivia Chen</div>
+          <div class="ig-handle-big">@oliviachen.wellness</div>
+        </div>
+      </div>
+      <div class="ig-stats">
+        <div class="ig-stat"><div class="n">8.2k</div><div class="l">Followers</div></div>
+        <div class="ig-stat"><div class="n">214</div><div class="l">Posts</div></div>
+        <div class="ig-stat"><div class="n">6.1%</div><div class="l">Eng. Rate</div></div>
+      </div>
+    </div>
+    <div class="about-label" style="margin-bottom:1rem;">Fitness · Wellness · Lifestyle — building an authentic community around balanced living</div>
+    <div class="ig-feed">
+      <div class="ig-feed-tile f1"><div class="ig-overlay"><span>Morning Routine</span></div></div>
+      <div class="ig-feed-tile f2"><div class="ig-overlay"><span>Workout GRWM</span></div></div>
+      <div class="ig-feed-tile f3"><div class="ig-overlay"><span>Green Smoothie</span></div></div>
+      <div class="ig-feed-tile f4"><div class="ig-overlay"><span>Rest Day Vlog</span></div></div>
+      <div class="ig-feed-tile f5"><div class="ig-overlay"><span>Pilates Flow</span></div></div>
+      <div class="ig-feed-tile f6"><div class="ig-overlay"><span>Supplement Stack</span></div></div>
+      <div class="ig-feed-tile f7"><div class="ig-overlay"><span>Mental Health</span></div></div>
+      <div class="ig-feed-tile f8"><div class="ig-overlay"><span>Meal Prep Sunday</span></div></div>
+      <div class="ig-feed-tile f9" style="background:#f8e8ef;"><div class="ig-overlay"><span>Weekend Reset</span></div></div>
+    </div>
+    <div class="ig-caption">Hover to preview content themes · Avg. 6.1% engagement rate · 214 posts since 2022</div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="about-label">Contact</div>
+    <h2 class="section-title">Let's Work Together</h2>
+    <div class="divider"></div>
+    <p>I'm actively seeking entry-level Digital Marketing roles, brand partnerships, and freelance social media strategy projects. Graduating May 2026 and available immediately after.</p>
+    <div class="contact-links">
+      <a href="#" class="contact-link">olivia.chen@email.com</a>
+      <a href="#" class="contact-link">LinkedIn</a>
+      <a href="#" class="contact-link">@oliviachen.wellness</a>
+      <a href="#" class="contact-link">Download Résumé</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Olivia Chen · Digital Marketing Portfolio · Built with intention
+</footer>
+
+</body>
+</html>
